@@ -22,7 +22,7 @@ interface BudgetData {
   electricity?: number
   gas?: number
   phone_provider?: string
-  phone_cost?: boolean
+  phone_cost?: number
   phone_yearly?: boolean
   cooking_per_week?: number
   eating_out_per_week?: number
@@ -365,7 +365,7 @@ export function NYUOnboardingForm() {
             <div className="flex gap-2">
               <input
                 type="number"
-                value={formData.phone_cost || ''}
+                value={typeof formData.phone_cost === 'number' ? formData.phone_cost : ''}
                 onChange={(e) => updateFormData('phone_cost', Number(e.target.value))}
                 placeholder="30"
                 className="flex-1 px-4 py-2 border border-primary/20 rounded-lg bg-white/50 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -379,7 +379,7 @@ export function NYUOnboardingForm() {
                 <option value="yearly">Per year</option>
               </select>
             </div>
-            {formData.phone_cost && (
+            {formData.phone_cost && typeof formData.phone_cost === 'number' && (
               <p className="text-xs text-muted-foreground mt-1">
                 ≈ ${(formData.phone_yearly ? formData.phone_cost / 12 : formData.phone_cost).toFixed(2)}/month
               </p>
@@ -427,7 +427,7 @@ export function NYUOnboardingForm() {
           {formData.cooking_per_week && formData.eating_out_per_week && (
             <div className="bg-accent/20 p-3 rounded-lg">
               <p className="text-sm text-foreground">
-                💡 Monthly estimate: ${((formData.eating_out_per_week * formData.avg_meal_cost * 4) + (formData.cooking_per_week * 3 * 4)).toFixed(0)}/month for food
+                💡 Monthly estimate: ${(((formData.eating_out_per_week || 0) * (formData.avg_meal_cost || 0) * 4) + ((formData.cooking_per_week || 0) * 3 * 4)).toFixed(0)}/month for food
               </p>
             </div>
           )}
@@ -564,7 +564,7 @@ export function NYUOnboardingForm() {
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">Phone</span>
-              <span>${formData.phone_yearly ? (formData.phone_cost || 0) / 12 : formData.phone_cost || 0}</span>
+              <span>${formData.phone_yearly && formData.phone_cost ? (formData.phone_cost / 12) : (formData.phone_cost || 0)}</span>
             </div>
             <div className="flex justify-between">
               <span className="font-semibold">Food (eat out)</span>
@@ -594,7 +594,7 @@ export function NYUOnboardingForm() {
                   (formData.wifi || 0) +
                   (formData.electricity || 0) +
                   (formData.gas || 0) +
-                  (formData.phone_yearly ? (formData.phone_cost || 0) / 12 : formData.phone_cost || 0) +
+                  (formData.phone_yearly && formData.phone_cost ? (formData.phone_cost / 12) : (formData.phone_cost || 0)) +
                   ((formData.eating_out_per_week || 0) * (formData.avg_meal_cost || 0) * 4) +
                   ((formData.coffee_per_week || 0) * (formData.coffee_cost || 0) * 4) +
                   (formData.shopping_monthly || 0) +
@@ -605,14 +605,14 @@ export function NYUOnboardingForm() {
             </div>
           </div>
           <div className="text-center">
-            <p className="text-sm text-muted-foreground">
-              That's approximately <span className="font-semibold text-primary">
+              <p className="text-sm text-muted-foreground">
+                That's approximately <span className="font-semibold text-primary">
               ${(
                 ((formData.rent || 0) +
                   (formData.wifi || 0) +
                   (formData.electricity || 0) +
                   (formData.gas || 0) +
-                  (formData.phone_yearly ? (formData.phone_cost || 0) / 12 : formData.phone_cost || 0) +
+                  (formData.phone_yearly && formData.phone_cost ? (formData.phone_cost / 12) : (formData.phone_cost || 0)) +
                   ((formData.eating_out_per_week || 0) * (formData.avg_meal_cost || 0) * 4) +
                   ((formData.coffee_per_week || 0) * (formData.coffee_cost || 0) * 4) +
                   (formData.shopping_monthly || 0) +

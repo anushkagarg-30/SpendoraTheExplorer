@@ -19,8 +19,9 @@ export default function RewardsPage() {
   useEffect(() => {
     // Calculate points from daily logs
     const logs = localStorage.getItem('dailyLogs')
+    let dailyLogs: any[] = []
     if (logs) {
-      const dailyLogs = JSON.parse(logs)
+      dailyLogs = JSON.parse(logs)
       setLogsCount(dailyLogs.length)
       // 10 points per day logged, 5 bonus points for staying under budget
       let points = dailyLogs.length * 10
