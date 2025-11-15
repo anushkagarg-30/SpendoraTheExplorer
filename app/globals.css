@@ -1,0 +1,142 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Spendora Compass Theme - Purple & Orange */
+  --primary-purple: #6f42c1;
+  --dark-purple: #4b2a9a;
+  --light-purple: #dcd0f4;
+  --accent-orange: #f6c51e;
+  --text-dark: #2d2d2d;
+  --bg-light: #f7f3ff;
+  
+  --background: #f7f3ff;
+  --foreground: #2d2d2d;
+  --card: #ffffff;
+  --card-foreground: #2d2d2d;
+  --popover: #ffffff;
+  --popover-foreground: #2d2d2d;
+  --primary: #6f42c1;
+  --primary-foreground: #ffffff;
+  --secondary: #f6c51e;
+  --secondary-foreground: #2d2d2d;
+  --muted: #e8e0f5;
+  --muted-foreground: #6f42c1;
+  --accent: #f6c51e;
+  --accent-foreground: #2d2d2d;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #dcd0f4;
+  --input: #f0ebf8;
+  --ring: #6f42c1;
+  --chart-1: #6f42c1;
+  --chart-2: #f6c51e;
+  --chart-3: #4b2a9a;
+  --chart-4: #a377d9;
+  --chart-5: #ffd966;
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2d2d2d;
+  --sidebar-primary: #6f42c1;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f6c51e;
+  --sidebar-accent-foreground: #2d2d2d;
+  --sidebar-border: #dcd0f4;
+  --sidebar-ring: #6f42c1;
+}
+
+.dark {
+  --background: #1a1528;
+  --foreground: #f7f3ff;
+  --card: #2d1f45;
+  --card-foreground: #f7f3ff;
+  --popover: #2d1f45;
+  --popover-foreground: #f7f3ff;
+  --primary: #a377d9;
+  --primary-foreground: #1a1528;
+  --secondary: #ffd966;
+  --secondary-foreground: #1a1528;
+  --muted: #4b2a9a;
+  --muted-foreground: #a377d9;
+  --accent: #ffd966;
+  --accent-foreground: #1a1528;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #4b2a9a;
+  --input: #3d2a60;
+  --ring: #a377d9;
+  --sidebar: #2d1f45;
+  --sidebar-foreground: #f7f3ff;
+  --sidebar-primary: #a377d9;
+  --sidebar-primary-foreground: #1a1528;
+  --sidebar-accent: #ffd966;
+  --sidebar-accent-foreground: #1a1528;
+  --sidebar-border: #4b2a9a;
+  --sidebar-ring: #a377d9;
+}
+
+@theme inline {
+  --font-sans: 'Poppins', 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Spendora Compass Animation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.compass-spin {
+  animation: spin-slow 20s linear infinite;
+}
