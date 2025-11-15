@@ -81,12 +81,29 @@ export function NYUOnboardingForm() {
   }
 
   const handleComplete = async () => {
-    setIsLoading(true)
-    localStorage.setItem('budgetData', JSON.stringify(formData))
-    localStorage.setItem('onboardingComplete', 'true')
-    await new Promise(resolve => setTimeout(resolve, 300))
-    router.push('/home')
+  setIsLoading(true)
+  
+  localStorage.setItem('budgetData', JSON.stringify(formData))
+  localStorage.setItem('onboardingComplete', 'true')
+  
+  try {
+    await fetch('http://localhost:8000/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_id: 'demo',
+        ...formData
+      })
+    })
+  } catch (error) {
+    console.error('Backend error:', error)
   }
+  
+  await new Promise(resolve => setTimeout(resolve, 300))
+  router.push('/home')
+}
 
   const schools = ['Tandon', 'CAS', 'Stern', 'GSAS', 'Gallatin', 'Tisch', 'Steinhardt', 'School of Medicine', 'Other']
   const programs = ['MS Computer Science', 'MS Computer Engineering', 'BS Business', 'MS Finance', 'MS Data Science', 'Other']
